@@ -26,6 +26,6 @@ public class InTour extends TourFile {
 
     @Override
     public double surcharge(){
-        return (tax + fee ) +  this.tourprice;
+        return (tax + fee) +  this.tourprice;
     }
 }

@@ -5,6 +5,7 @@
  */
 package tour;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -17,6 +18,10 @@ public abstract class TourFile implements ITour {
     protected double tourprice;
     protected String transport;
     Date sdate,edate;
+
+    public TourFile(){
+
+    }
 
     public TourFile(String code, String title, double price, String transport, Date sdate2,Date edate2){
         tourcode = code;
@@ -63,6 +68,22 @@ public abstract class TourFile implements ITour {
     public void setTransport(String transport) {
         this.transport = transport;
     }  
+
+    public static Comparator<TourFile> cpprice = new Comparator<TourFile>() {
+
+        public int compare(TourFile s1, TourFile s2) {
+           double t1 = s1.getTourprice();
+           double t2 = s2.getTourprice();
+           if (t2>t1) return (int) (t2 - t1 + 1);
+           else if (t2<t1) return (int) (t2 - t1 - 1);
+           else {
+                String a1 = s1.getTourtitle();
+                String a2 = s2.getTourtitle();
+                return a1.compareTo(a2);
+           }
+        }
+    };
+  
     
     @Override
     public String toString() {

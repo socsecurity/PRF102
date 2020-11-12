@@ -5,6 +5,8 @@
  */
 package tour;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -43,54 +45,82 @@ public class Run {
           {
               case 1: {
                   t.addTour();
+                  break;
               }
               case 2: {
                   t.Dlist();
+                  break;
               }
               case 3: {
                   t.InterAverageTour();
+                  break;
               }
               case 4: {
                   System.out.print("Enter code you want to search: ");
                   String co = in.next();
-                  t.searchcode(co);
+                  t.searchCode(co);
+                  break;
               }
               case 5: {
                   System.out.print("Enter title you want to search: ");
                   String ti = in.next();
                   t.searchtitle(ti);
+                  break;
               }
               case 6: {
-                  System.out.print("Enter date you want to search: ");
-                  Date da = in.nextDate();
-                  t.searchdate(da);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                try {
+                    System.out.println(t.searchdate(simpleDateFormat.parse(in.nextLine())));
+                } catch (ParseException exp) {
+                    exp.printStackTrace();
+                }
+                break;
               }
               case 7: {
                   System.out.print("Enter transport you want to search: ");
                   String str = in.next();
                   t.searchtransport(str);
+                  break;
               }
               case 8: {
                   t.FirstMiniToCharge();
+                  break;
               }
               case 9: {
                   System.out.print("Enter code tour you want to remove: ");
                   String co = in.next();
                   t.removeCode(co);
+                  break;
               }
               case 10: {
                   System.out.print("Enter start date tour you want to remove:");
-                  Date sda = in.nextDate();
-                  t.ResdateASpe(sda);
+                  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                  String sda = in.nextLine();
+                  System.out.println("-----------Delete list------------");
+                  try {
+                    System.out.println(t.searchdate(simpleDateFormat.parse(sda)));
+                  } catch (ParseException e) {
+                      e.printStackTrace();
+                  }
+                  try {
+                      t.ResdateASpe(simpleDateFormat.parse(sda));
+                  } catch (ParseException e) {
+                      e.printStackTrace();
+                  }
+                  System.out.println("----Remove complete----");
+                  break;
               }
               case 11: {
                   t.sortTour();
+                  break;
               }
               case 12: {
                   t.update();
+                  break;
               }
               case 13: {
                   t.SLFile();
+                  break;
               }
               default: System.out.print("Please enter again!");
                   
