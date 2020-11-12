@@ -22,6 +22,8 @@ public class Run {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         TourList t = new TourList();
+        int c;
+        do{
           System.out.println("Menu: ");
           System.out.println("1. Add new tours to the list.");
           System.out.println("2. List all domestic tours in the system.");
@@ -35,10 +37,7 @@ public class Run {
           System.out.println("10. Remove tours with start date after the specified date.");
           System.out.println("11. Sort all tours of list by multiple levels in descending order of tour's price and then in ascending order of tour's title.");
           System.out.println("12. Update tour information.");
-          System.out.println("13. Save/Load tours to/ from file.");
-          int c;
-          do{
-              
+          System.out.println("13. Save/Load tours to/ from file.");              
           System.out.print("Enter your choice: ");
           c = in.nextInt();
           switch(c)
@@ -49,6 +48,7 @@ public class Run {
               }
               case 2: {
                   t.Dlist();
+                  
                   break;
               }
               case 3: {

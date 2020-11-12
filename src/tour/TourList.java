@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class TourList {
@@ -24,16 +23,18 @@ public class TourList {
         String code;
         String title;
         double price;
-        String transport;
-        Date sdate, edate;
+        String transport="";
+        Date sdate=null;
+        Date edate=null;
         Scanner in = new Scanner(System.in);
         System.out.println("Enter new tour... ");
         System.out.println("Which type of tour");
-        System.out.println("\t1. Domestic Tour.\n\t2.International Tour.");
+        System.out.println("\t1. Domestic Tour.\n\t2. International Tour.");
         int c;
         do {
-            System.out.println("YOUR CHOICE: ");
+            System.out.print("YOUR CHOICE: ");
             c = in.nextInt();
+            in.nextLine();
         } while (c < 1 && c > 2);
 
         boolean existed = false;
@@ -45,12 +46,12 @@ public class TourList {
                 existed = true;
             }
         } while (existed == true);
-
+        
         System.out.print("Your title: ");
         title = in.nextLine();
         System.out.print("Prices: ");
         price = in.nextDouble();
-        System.out.print("Transport: ");
+        System.out.println("Transport: ");
         int tc;
         do {
             System.out.print("\t1. Aircraft.\n\t2. Car.\nYOUR CHOICE: ");
@@ -60,7 +61,7 @@ public class TourList {
             else if (tc == 2)
                 transport = "Car";
         } while (tc < 1 && tc > 2);
-
+        in.nextLine();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         System.out.print("Start Date(yyyy/MM/dd): ");
         try {
@@ -73,18 +74,7 @@ public class TourList {
             edate = simpleDateFormat.parse(in.nextLine());
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-
-        do {
-            System.out.println("YOUR CHOICE: ");
-            c = in.nextInt();
-            if (c == 1) {
-                int tip;
-
-            } else if (c == 2) {
-
-            }
-        } while (c < 1 && c > 2);
+        }           
 
         switch(c){
             case 1:           
@@ -110,8 +100,11 @@ public class TourList {
     public ArrayList<TourFile> Dlist() {
         ArrayList<TourFile> m = new ArrayList<>();
         for (TourFile v : list) {
-            if (v instanceof DTour)
+            if (v instanceof DTour){
                 m.add(v);
+                v.toString();
+            }
+                
         }
         return m;
     }
@@ -119,8 +112,10 @@ public class TourList {
     public ArrayList<TourFile> Ilist() {
         ArrayList<TourFile> m = new ArrayList<>();
         for (TourFile v : list) {
-            if (v instanceof InTour)
-                m.add(v);
+            if (v instanceof InTour) {
+            m.add(v);
+            v.toString();
+        }
         }
         return m;
     }
