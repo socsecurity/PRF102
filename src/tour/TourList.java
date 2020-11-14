@@ -248,21 +248,22 @@ public class TourList {
 
     public void SLFile() throws ClassNotFoundException, IOException {
         System.out.println("Write or Read File:");
-        System.out.println("/t1. Read.");
-        System.out.println("/t2. Write."); 
+        System.out.println("\t1. Read.");
+        System.out.println("\t2. Write."); 
         Scanner sc = new Scanner(System.in);
         String c = sc.nextLine();
-        sc.close();
         switch (c){
             case "1":
-                ImportData(FileSave);                
+                ImportData(FileSave);    
+                System.out.println("---------Done!--------");            
             break;
 
             case "2":
                 ExportData(FileSave);
+                System.out.println("---------Done!--------");
             break;
             default:
         }
-        System.out.println("---------Done!--------");
+        
     }
 }
