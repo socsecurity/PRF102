@@ -1,5 +1,11 @@
 package tour;
-
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +16,7 @@ import java.util.Scanner;
 public class TourList {
 
     private ArrayList<TourFile> list = new ArrayList<>();
+    String FileSave="data.txt";
 
     public ArrayList<TourFile> getlist() {
         return list;
@@ -199,8 +206,63 @@ public class TourList {
     {
         
     }
-    public void SLFile()
-    {
-        
+
+    public void ExportData(String fileName){
+        try {
+            File f = new File(fileName); 
+            if (!f.exists()) {
+            f.createNewFile();
+            }
+            FileOutputStream fo = new FileOutputStream(f);
+            ObjectOutputStream oo = new ObjectOutputStream(fo);
+            for (TourFile t : list){
+                oo.writeObject(t);
+            }
+            oo.close();
+            fo.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<TourFile> ImportData (String fileName) throws IOException, ClassNotFoundException {
+        ArrayList<TourFile> list = new ArrayList<>();
+        File f = new File(fileName);
+        if (!f.exists()) {
+            System.out.println("File not exist!");
+            return list;
+        }
+        FileInputStream fi = new FileInputStream(f);
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        while (true){
+            try{      
+                TourFile t = (TourFile) oi.readObject();    
+                list.add(t);
+            } catch (EOFException e){
+                break;                       
+            }
+        }
+        return list;
+    }
+
+    public void SLFile() throws ClassNotFoundException, IOException {
+        System.out.println("Write or Read File:");
+        System.out.println("/t1. Read.");
+        System.out.println("/t2. Write."); 
+        Scanner sc = new Scanner(System.in);
+        String c = sc.nextLine();
+        sc.close();
+        switch (c){
+            case "1":
+                ImportData(FileSave);                
+            break;
+
+            case "2":
+                ExportData(FileSave);
+            break;
+            default:
+        }
+        System.out.println("---------Done!--------");
     }
 }

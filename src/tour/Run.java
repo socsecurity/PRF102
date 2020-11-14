@@ -5,6 +5,7 @@
  */
 package tour;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -17,8 +18,10 @@ public class Run {
 
     /**
      * @param args the command line arguments
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
         Scanner in = new Scanner(System.in);
         TourList t = new TourList();
         int c;
@@ -132,12 +135,14 @@ public class Run {
                 }
                 case 14: {
                     out = false;
+                    System.out.println("Have a nice day!");
+                    return ;
                 }
                 default: {
-                    System.out.print("Please enter again!");
+                    if (out = true) System.out.println("Please enter again!");
                 }   
             }
-          }
-          while(out);
-      } 
+        } while(out);
+
+    } 
 }
